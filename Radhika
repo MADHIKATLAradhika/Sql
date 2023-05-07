@@ -1,0 +1,150 @@
+Exercise 1:
+ 
+--  Create a database schema for the online consultation and therapy website. The database should contain the following tables:-
+
+-- Doctor table:- The table should contain the attributes such as id, name, specialization, etc.
+
+ create database Online_Consultation
+ 
+ create table doctor(Doctor_id int primary key not null,
+ Doctor_Name varchar(30) not null,
+ Specialization varchar(30) not null,
+ Gender varchar(10) not null,
+ Experience int not null,
+ Success_Rate real not null)
+ 
+ insert into doctor values (101,"Radhika","dentist","Female",5,9.8),
+ (102,"Ravi Teja","Cardiologist","Male",9,9.7)
+ 
+ 
+--  Appointments table:- The table should contain information related to appointments set up by doctors and patients.
+
+create table Appointments(Patient_id int primary key not null,
+Patient_Name varchar(30) not null,
+Room_no int not null,
+date date not null)
+
+
+insert into Appointments values (1,"Vyshnavi",3,"2023-03-01"),
+(2,"Bhargavi",5,"2023-3-02")
+ 
+ 
+--  Patient table:- The table should contain information on patients.
+ 
+ create table Patient(Patient_id int primary key not null,
+ Patient_Name varchar(30) not null,
+ Patient_Gender varchar(30) not null,
+ Patient_Disease varchar(30) not null,
+ Patient_age varchar(30) not null,
+ Blood_group varchar(3) not null)
+ 
+ insert into Patient values (23,"MS Dhoni","Male","Leg Pain",41,"O+"),
+ (21,"Suresh Raina","Male","Tooth Pain",38,"B+")
+ 
+ 
+--  Reviews table:- This table should contain reviews posted by patients.
+
+
+create table Reviews(Doctor_id int primary key not null,
+Doctor_Name varchar(30) not null,
+Patient_Name varchar(30) not null,
+Success_Rate real not null,
+FeedBack varchar(30) not null)
+
+
+insert into Reviews values(1,"Radhika","Vyshanvi",9.8,"Excellent Doctor"),
+(2,"Ravi Teja","Sundhar",9.7,"Very good")
+
+
+Exercise 2:
+
+QUESTIONS:
+
+
+create table contact_table(Id int primary key not null,
+Email varchar(30) not null,
+fname varchar(30) not null,
+lname varchar(30) not null,
+company varchar(30) not null,
+ Active_flag int not null,
+ opted_out int not null);
+ 
+ select * from contact_table;
+ 
+ insert into contact_table values(123,"a@a.com","Kian","Seth","ABC",1,1),
+ (133,"b@a.com","Neha","Seth","ABC",1,0),
+(234,"c@c.com","Puru","Malik","CDF",0,0),
+(342,"d@d.com","Sid","Maan","TEG",1,0);
+
+-- 1.Select all columns from the contact table where the active flag is 1
+
+select * from contact_table where Active_flag=1;
+
+-- 2. Deactivate contacts who are opted out 
+
+delete from contact_table where opted_out=1
+
+-- 3.Delete all the contacts who have the company name as ‘ABC’
+
+delete from contact_table where company="ABC" 
+
+-- 4.Insert a new row with id as 658, name as ‘mili’, email as ‘mili@gmail.com’, the company as ‘DGH’, active flag as 1, opt-out flag as 1
+
+insert into contact_table values(658,"mili@gmail.com","mili","null","DGH",1,1)
+ 
+--  5.Pull out the unique values of the company column 
+
+select distinct(company) from contact_table
+
+-- 6.Update name “mili” to “niti”.
+
+update contact_table set fname="niti" where fname="mili"
+
+Exercise 3:
+
+-- Write a SQL query to find those customers with a grade less than 100. It should return cust_name, customer city, grade, salesman, and salesman city. The result should be ordered by ascending customer_id.
+
+create table customer(customer_id int primary key not null,
+cust_name varchar(30) not null,
+city varchar(30) not null,
+grade int,
+salesman_id int not null);
+
+select * from customer
+
+
+
+insert into customer values(3002,"Nick Rimando","New York",100,5001),
+(3007,"Brad Davis","New York",200,5001),
+(3005,"Graham Zusi","California",200,5002),
+(3008,"Julian Green","London",300,5002),
+(3004,"Fabian Johnson","Paris",300,5006),
+(3009,"Geoff Cameron","Berlin",90,5003),
+(3003,"Jozy altidor","Moscow",200,5007),
+(3001,"Brad Guzank","London",NULL,5005);
+
+create table salesman(salesman_id int primary key not null,
+name varchar(30) not null,
+city varchar(30) not null,
+commission real not null);
+
+select * from salesman
+
+insert into salesman values(5001,"james Hoog","New York",0.15),
+(5002,"Nail Knite","paris",0.13),
+ (5005,"Pit Alex","London",0.11),
+ (5006,"Mc Lyon","paris",0.14),
+ (5007,"Paul Adam","Rome",0.13),
+ (5003,"Lauseon Hen","San Jose",0.12);
+
+
+select c.cust_name,c.city as Customer_city ,grade,s.salesman_id,s.name as Salesman_Name,s.city as salesman_city from customer c,salesman s where grade < 100 and c.salesman_id=s.salesman_id order by customer_id ASC
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
